@@ -17,7 +17,7 @@
   ],
   "require": {
     "php": ">=5.3.0",
-    "neitanod/forceutf8": "dev-master"
+    "neitanod/forceutf8": "2.x"
   },
   "autoload": {
     "psr-4": {"OpenCalais\\": "src/OpenCalais"}
