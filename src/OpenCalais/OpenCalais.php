@@ -9,8 +9,9 @@
 * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
 *
 */
+namespace OpenCalais;
 
-class OpenCalaisException extends Exception {}
+use OpenCalais\Exception\OpenCalaisException;
 
 /**
  * Class OpenCalais. Working with OpenCalais API
