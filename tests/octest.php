@@ -29,17 +29,35 @@ The ultimatum may send Yahoo Chief Executive Officer Jerry Yang scrambling to fi
 EOD;
 
 try {
+
+    if(PHP_SAPI != 'cli'){
+        $html_b1 = '<b>';
+        $html_b2 = '</b>';
+        $html_ul1 = '<ul>';
+        $html_ul2 = '</ul>';
+        $html_li1 = '<li>';
+        $html_li2 = '</li>';
+    }
+    else{
+        $html_b1 = '** ';
+        $html_b2 = " **\n";
+        $html_ul1 = "\n";
+        $html_ul2 = "\n";
+        $html_li1 = '    - ';
+        $html_li2 = "\n";
+    }
+
     $entities = $oc->getEntities($content);
     foreach ($entities as $type => $values) {
 
-        echo "<b>" . $type . "</b>";
-        echo "<ul>";
+        echo $html_b1 . $type . $html_b2;
+        echo $html_ul1;
 
         foreach ($values as $entity) {
-            echo "<li>" . $entity . "</li>";
+            echo $html_li1 . $entity . $html_li2;
         }
 
-        echo "</ul>";
+        echo $html_ul2;
 
     }
 } catch (\OpenCalais\Exception\OpenCalaisException $e) {
