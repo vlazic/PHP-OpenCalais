@@ -4,12 +4,23 @@ Open Calais Tags is a PHP class for extracting entities and tags from text using
 
 Calais is free for both personal and commercial use, and usage of this class requires a Calais API key. Getting an API key is an easy, automated process. Just click the "Request API Key" link at the top of their site.
 
+## Install via composer ##
+
+Edit your composer.json file to include the following:
+
+```json
+{
+    "require": {
+        "lsmonki/php-open-calais": "2.x"
+    }
+}
+```
+
 ## Usage ##
 
 Basic usage is simple. Create an instance of the class with your API key, and call the getEntities method using your content string.
 
-    require('opencalais.php');
-    $oc = new OpenCalais('your-api-key');
+    $oc = new \OpenCalais\OpenCalais('your-api-key');
     $entities = $oc->getEntities($content);
 
 ### Example input ###

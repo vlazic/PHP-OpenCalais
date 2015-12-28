@@ -1,5 +1,5 @@
 {
-  "name": "lsmonki/PHP-OpenCalais",
+  "name": "lsmonki/php-open-calais",
   "type": "library",
   "description": "A PHP class for extracting entities and social tags from documents with the OpenCalais API http://www.opencalais.com/",
   "keywords": ["open calais", "opencalais", "metadata", "semantic analysis", "semantic data", "semantic"],
