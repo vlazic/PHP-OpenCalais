@@ -30,6 +30,7 @@ EOD;
 
 try {
 
+    //CLI Support
     if(PHP_SAPI != 'cli'){
         $html_b1 = '<b>';
         $html_b2 = '</b>';
@@ -53,8 +54,21 @@ try {
         echo $html_b1 . $type . $html_b2;
         echo $html_ul1;
 
-        foreach ($values as $entity) {
-            echo $html_li1 . $entity . $html_li2;
+        foreach ($values as $subtype => $entity) {
+            if(!is_array($entity)) {
+                echo $html_li1 . $entity . $html_li2;
+            }
+            else {
+                echo '    ' . $html_b1 . $subtype . $html_b2;
+                echo $html_ul1;
+
+                foreach ($entity as $subentity) {
+                    echo '    ' . $html_li1 . $subentity . $html_li2;
+
+                }
+
+                echo $html_ul2;
+            }
         }
 
         echo $html_ul2;

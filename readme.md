@@ -22,42 +22,57 @@ Basic usage is simple. Create an instance of the class with your API key, and ca
 
     Array
     (
-        [IndustryTerm] => Array
+        [topics] => Array
             (
-                [0] => Internet
-                [1] => software maker
-                [2] => Internet search
+                [0] => Business_Finance
+                [1] => Technology_Internet
             )
-        [Person] => Array
-            (
-                [0] => Steve Ballmer
-                [1] => Jerry Yang
-                [2] => Colin Gillis
-            )
-        [Company] => Array
-            (
-                [0] => Google Inc.
-                [1] => Canaccord Adams
-                [2] => Yahoo!
-                [3] => Microsoft Corp.
-            )
-        [Currency] => Array
-            (
-                [0] => USD
-            )
-        [SocialTag] => Array
-            (
-                [0] => New encyclopedism
-                [1] => Microsoft
-                [2] => Jerry Yang
-                [3] => Steve Ballmer
-                [4] => Bing
-                [5] => Yahoo!
-                [6] => Internet search engines
-                [7] => Hypertext
-            )
-    )
 
+        [socialTag] => Array
+            (
+                [0] => Alibaba Group
+                [1] => World Wide Web
+                [2] => Yahoo!
+                [3] => Steve Ballmer
+                [4] => Microsoft
+                [5] => Ballmer
+                [6] => Jerry Yang
+                [7] => Canaccord Genuity
+            )
+
+        [entities] => Array
+            (
+                [IndustryTerm] => Array
+                    (
+                        [0] => software maker
+                        [1] => Internet search
+                        [2] => Internet
+                    )
+
+                [Company] => Array
+                    (
+                        [0] => Canaccord Adams
+                        [1] => Yahoo
+                        [2] => Google Inc.
+                        [3] => Yahoo! Inc.
+                        [4] => Microsoft Corp.
+                    )
+
+                [Person] => Array
+                    (
+                        [0] => Colin Gillis
+                        [1] => Steve Ballmer
+                        [2] => Jerry Yang
+                    )
+
+                [Position] => Array
+                    (
+                        [0] => Chief Executive Officer
+                    )
+
+            )
+
+    )
 
 ## Optional Settings ##
 

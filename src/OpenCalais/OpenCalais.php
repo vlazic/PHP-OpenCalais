@@ -73,7 +73,12 @@ class OpenCalais {
 
         foreach ($object as $item) {
             if (!empty($item->_typeGroup) && !empty($item->name)) {
-                $this->entities[$item->_typeGroup][] = trim($item->name);
+                if(!empty($item->_type)){
+                    $this->entities[$item->_typeGroup][$item->_type][] = trim($item->name);
+                }
+                else{
+                    $this->entities[$item->_typeGroup][] = trim($item->name);
+                }
             }
         }
 
