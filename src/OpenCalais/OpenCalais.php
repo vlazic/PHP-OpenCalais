@@ -12,6 +12,7 @@
 namespace OpenCalais;
 
 use OpenCalais\Exception\OpenCalaisException;
+use ForceUTF8\Encoding;
 
 /**
  * Class OpenCalais. Working with OpenCalais API
@@ -60,8 +61,8 @@ class OpenCalais {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $document);
 
-        $response = curl_exec($ch);        
-        $response = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response);
+        $response = curl_exec($ch);
+        $response = Encoding::fixUTF8($response);
 
         $object = json_decode($response);
         if (empty($object)) {
