@@ -21,6 +21,8 @@ class OpenCalais {
 
     public $outputFormat = 'application/json';
     public $contentType = 'text/html';
+    // Use this parameter to exclude the submitted text from the output, thus reducing the size of the response
+    public $omitOutputtingOriginalText = 'true';
 
     private $api_url = 'https://api.thomsonreuters.com/permid/calais';
     private $api_token = '';
@@ -66,7 +68,8 @@ class OpenCalais {
             array(
                 'X-AG-Access-Token: ' . $this->api_token,
                 'Content-Type: ' . $this->contentType,
-                'outputFormat: ' . $this->outputFormat
+                'outputFormat: ' . $this->outputFormat,
+                'omitOutputtingOriginalText: ' . $this->omitOutputtingOriginalText
             )
         );
 
