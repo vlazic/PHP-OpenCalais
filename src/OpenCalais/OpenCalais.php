@@ -88,7 +88,8 @@ class OpenCalais {
 
         foreach ($object as $item) {
             if (!empty($item->_typeGroup) && !empty($item->name) 
-                && ((isset($item->importance) && $item->importance >= $relevance) 
+                && $item->forenduserdisplay === 'true'
+                && ((isset($item->importance) && (float) $item->importance >= $relevance) 
                 || $item->relevance >= $relevance)) {
 
                 // if flatten is true, use only one array, no subarrays
