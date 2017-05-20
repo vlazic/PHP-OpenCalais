@@ -92,6 +92,7 @@ class OpenCalais {
         foreach ($object as $item) {
             if (!empty($item->_typeGroup) && !empty($item->name) 
                 && $item->forenduserdisplay === 'true'
+                && ((isset($item->score) && (float) $item->score >= $relevance) 
                 && ((isset($item->importance) && (float) $item->importance >= $relevance) 
                 || $item->relevance >= $relevance)) {
 
