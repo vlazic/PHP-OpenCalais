@@ -1,23 +1,24 @@
 <?php
 
 /**
-* Open Calais Tags
-*
-* @version: 2.0
-* @author: Dan Grossman http://www.dangrossman.info/
-* @copyright: Copyright (c) 2012-2015 Dan Grossman. All rights reserved.
-* @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
-*
-*/
+ * Open Calais Tags
+ *
+ * @version: 2.0
+ * @author: Dan Grossman http://www.dangrossman.info/
+ * @copyright: Copyright (c) 2012-2015 Dan Grossman. All rights reserved.
+ * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
+ *
+ */
 namespace OpenCalais;
 
-use OpenCalais\Exception\OpenCalaisException;
 use ForceUTF8\Encoding;
+use OpenCalais\Exception\OpenCalaisException;
 
 /**
  * Class OpenCalais. Working with OpenCalais API
  */
-class OpenCalais {
+class OpenCalais
+{
 
     public $outputFormat = 'application/json';
     public $contentType = 'text/html';
@@ -32,7 +33,8 @@ class OpenCalais {
      * @param string $api_token
      * @throws OpenCalaisException
      */
-    public function __construct($api_token) {
+    public function __construct($api_token)
+    {
         if (empty($api_token)) {
             throw new OpenCalaisException('An OpenCalais API token is required to use this class.');
         }
@@ -45,31 +47,33 @@ class OpenCalais {
      * @param array $array
      * @return array
      */
-    private function array_iunique($array) {
-        $lowered = array_map('strtolower', $array); 
-        return array_intersect_key($array, array_unique($lowered)); 
+    private function arrayIunique($array)
+    {
+        $lowered = array_map('strtolower', $array);
+        return array_intersect_key($array, array_unique($lowered));
     }
 
     /**
      * Return entities by document
      * @param string $document
-     * @param float $relevance From 0 to 1. Return only elements with greater 
+     * @param float $relevance From 0 to 1. Return only elements with greater
      *                         than or equal relevance value. Default is 0.
      * @param bool $flatten    Return flattened or nested array.
      *                         Default is false (nested).
      * @return array
      * @throws OpenCalaisException
      */
-    public function getEntities($document, $relevance = 0, $flatten = false) {
+    public function getEntities($document, $relevance = 0, $flatten = false)
+    {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->api_url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, 
+        curl_setopt($ch, CURLOPT_HTTPHEADER,
             array(
                 'X-AG-Access-Token: ' . $this->api_token,
                 'Content-Type: ' . $this->contentType,
                 'outputFormat: ' . $this->outputFormat,
-                'omitOutputtingOriginalText: ' . $this->omitOutputtingOriginalText
+                'omitOutputtingOriginalText: ' . $this->omitOutputtingOriginalText,
             )
         );
 
@@ -90,20 +94,19 @@ class OpenCalais {
         }
 
         foreach ($object as $item) {
-            if (!empty($item->_typeGroup) && !empty($item->name) 
+            if (!empty($item->_typeGroup) && !empty($item->name)
                 && $item->forenduserdisplay === 'true'
-                && ((isset($item->score) && (float) $item->score >= $relevance) 
-                && ((isset($item->importance) && (float) $item->importance >= $relevance) 
-                || $item->relevance >= $relevance)) {
+                && ((isset($item->score) && (float) $item->score >= $relevance)
+                    || (isset($item->importance) && (float) $item->importance >= $relevance)
+                    || $item->relevance >= $relevance)) {
 
                 // if flatten is true, use only one array, no subarrays
                 if ($flatten) {
                     $this->entities[] = trim($item->name);
                 } else {
-                    if(!empty($item->_type)){
+                    if (!empty($item->_type)) {
                         $this->entities[$item->_typeGroup][$item->_type][] = trim($item->name);
-                    }
-                    else{
+                    } else {
                         $this->entities[$item->_typeGroup][] = trim($item->name);
                     }
                 }
@@ -113,7 +116,7 @@ class OpenCalais {
 
         // remove duplicate tags
         if ($flatten) {
-            $this->entities = array_values($this->array_iunique($this->entities));
+            $this->entities = array_values($this->arrayIunique($this->entities));
         }
 
         return $this->entities;
